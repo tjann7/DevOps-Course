@@ -1,21 +1,24 @@
-from datetime import datetime
-import zoneinfo
-from flask import Flask, request, render_template
-import time
+"""
+- flask is a general python webapp framework
+- Module datetime gives us time of any Timezone
+"""
+from datetime import datetime, timedelta, timezone
+from flask import Flask, render_template
 
 app = Flask(__name__)
-# zone = zoneinfo.ZoneInfo("Europe/Moscow")
+MOSCOW = timezone(timedelta(hours=3), "Moscow")
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    """A primary method generating main and only webpage"""
+    msc = datetime.now(MOSCOW)
+    current = datetime.today()
 
-@app.route("/getTime", methods=['GET'])
-def getTime():
-    # offset = datetime.now(zone).utcoffset().total_seconds()//(60*60)
-    offset = datetime.now().utcoffset().total_seconds()//(60*60)
-    print(offset) # 3 / 4 - This depends on daylight saving time
-    print("browser time: ", request.args.get("time"))
-    print("server time : ", time.strftime('%A %B, %d %Y %H:%M:%S'));
-    return "Done"
+    msc = msc.strftime("%H:%M:%S %Z")
+    current = current.strftime("%H:%M:%S %Z")
 
+    return render_template("index.html", msc=msc, current=current)
+
+
+if __name__ == "__main__":
+    app.run()
