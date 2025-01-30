@@ -38,3 +38,20 @@ When trying to get the result with conditions unsatisfied, the button will get r
 
 ![](images/image2.png)
 
+## Docker
+
+Building the image:
+```bash
+docker build -t your_image_name .
+```
+
+Pulling the image:
+```bash
+docker pull tjann7/go_random
+```
+
+Running the image locally ~~if you don't like parameters, good luck finding container's address~~:
+```bash
+docker run --network="host" go_random
+```
+

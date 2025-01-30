@@ -1,7 +1,7 @@
 FROM python:3.13.1-alpine3.21
 
 # Environment variables
-ENV ADMIN_USER="mark"
+ENV ADMIN_USER="admin"
 
 # Install the application dependencies
 COPY requirements.txt ./

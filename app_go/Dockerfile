@@ -1,7 +1,7 @@
 FROM golang:1.23.5-alpine3.21
 
 # Environment variables
-ENV ADMIN_USER="mark"
+ENV ADMIN_USER="admin"
 
 # Copy static file directory
 COPY static ./static
