@@ -1,5 +1,7 @@
 ## Python Flask Moscow timezone Watch
 
+![Python CI](https://github.com/IlsiyaNasibullina/S25-core-course-labs/actions/workflows/app_python.yml/badge.svg)
+
 ## Repository preparation
 
 ```bash
@@ -51,13 +53,31 @@ Result of running is as follows:
 
 ![](images/image_docker2.png)
 
+## Running unittest
 
-# ENDING
-
-To run distroless:
+While being in the repository's directory, input the following commands:
 
 ```bash
-docker build -f distroless.dockerfile -t dless .
-docker run dless
+cd app_python
+python -m unittest tests.py
 ```
+This runs a few commands to check that the webapp works properly. In case of successful passing, the result should be similar to this:
+
+```bash
+...
+----------------------------------------------------------------------
+Ran 3 tests in 0.004s
+
+OK
+```
+
+## CI Workflow
+
+The workflow is configured to automate the following stages:
+
+* Dependencies - using requerements.txt
+* Lint - Checking coding conventions (line length, etc.)
+* Snyk - Checks for security vulnerabilities.
+* Test - tests.py unittest is called to verify functionality
+* Docker - Builds and pushes the Docker image to Docker Hub.
 
