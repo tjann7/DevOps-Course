@@ -51,13 +51,14 @@ Result of running is as follows:
 
 ![](images/image_docker2.png)
 
+## CI Workflow
 
-# ENDING
+The workflow is configured to automate the following stages:
 
-To run distroless:
-
-```bash
-docker build -f distroless.dockerfile -t dless .
-docker run dless
-```
+* Dependencies - using requerements.txt
+* Lint - Checking coding conventions (line length, etc.)
+<!-- * Snyk - Checks for security vulnerabilities.
+* Run - Starts the application. -->
+* Test - tests.py unittest is called to verify functionality
+* Docker - Builds and pushes the Docker image to Docker Hub.
 

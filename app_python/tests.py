@@ -2,9 +2,9 @@
 COMMENT
 '''
 from datetime import datetime
+import re
 import unittest
 from moscow_app import app, MOSCOW
-import re
 
 
 class TestMoscowApp(unittest.TestCase):
