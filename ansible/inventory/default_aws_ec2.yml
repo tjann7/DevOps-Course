@@ -3,6 +3,6 @@ ec2:
     ansible_user: admin
     ansible_ssh_private_key_file: ~/.ssh/id_ed25519
   hosts:
-    172.17.0.1
+    local
 
 
