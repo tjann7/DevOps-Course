@@ -8,6 +8,8 @@ services:
     image: grafana/loki:latest
     ports:
       - "3100:3100"
+    volumes:
+      - ./loki:/etc/loki
     command: -config.file=/etc/loki/local-config.yaml
     networks:
       - loki
@@ -63,3 +65,13 @@ services:
     image: tjann7/go_random:latest
     ports:
       - "5500:5500"
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+    networks:
+      - loki
