@@ -8,7 +8,7 @@ import (
 
 var tpl = template.Must(template.ParseFiles("static/index.html"))
 
-const PORT = "3000"
+const PORT = "5500"
 
 func indexHandler(w http.ResponseWriter, r *http.Request) {
 	// Handler calls template to show index.html

@@ -7,6 +7,8 @@ from flask import Flask, render_template
 
 app = Flask(__name__)
 MOSCOW = timezone(timedelta(hours=3), "Moscow")
+HOST = "0.0.0.0"
+PORT = 5005
 
 @app.route("/")
 def index():
@@ -21,4 +23,4 @@ def index():
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(HOST, PORT)

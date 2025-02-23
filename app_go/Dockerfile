@@ -16,6 +16,6 @@ USER $ADMIN_USER
 RUN go build -o randomizer main.go
 
 # Explicitly specify port
-EXPOSE 3000
+EXPOSE 5500
 
 CMD ["./randomizer"]
