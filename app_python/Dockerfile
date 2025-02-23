@@ -17,6 +17,6 @@ RUN adduser --system $ADMIN_USER
 USER $ADMIN_USER
 
 # Explicitly specify port
-EXPOSE 5000
+EXPOSE 5005
 
 CMD ["python", "moscow_app.py"]
