@@ -20,6 +20,14 @@ resource "yandex_compute_disk" "boot-disk-1" {
   image_id = "fd806aa6rq1b2cdqe03u" # fedora 35
 }
 
+resource "yandex_compute_disk" "boot-disk-2" {
+  name     = "boot-disk-2"
+  type     = "network-hdd"
+  zone     = "ru-central1-a"
+  size     = "20"
+  image_id = "fd806aa6rq1b2cdqe03u" # fedora 35
+}
+
 resource "yandex_compute_instance" "vm-1" {
   name = "terraform1"
   resources {
@@ -47,7 +55,7 @@ resource "yandex_compute_instance" "vm-2" {
     memory = 4
   }
   boot_disk {
-    disk_id = yandex_compute_disk.boot-disk-1.id
+    disk_id = yandex_compute_disk.boot-disk-2.id
   }
 
   network_interface {
