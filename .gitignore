@@ -178,3 +178,6 @@ cython_debug/
 .pypirc
 terraform/yandex_cloud/key.json
 terraform/yandex_cloud/terraform.rc
+ansible/roles/web_app/vars/main.yml
+ansible/ansible.builtin.env
+terraform/yandex_cloud/authorized_key.json
