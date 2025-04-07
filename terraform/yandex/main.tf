@@ -17,7 +17,7 @@ resource "yandex_compute_disk" "boot-disk-1" {
   type     = "network-hdd"
   zone     = "ru-central1-a"
   size     = "20"
-  image_id = "fd806aa6rq1b2cdqe03u" # fedora 35
+  image_id = "fd864gbboths76r8gm5f" # ubuntu-22-04-lts-v20221214
 }
 
 resource "yandex_compute_disk" "boot-disk-2" {
@@ -25,7 +25,7 @@ resource "yandex_compute_disk" "boot-disk-2" {
   type     = "network-hdd"
   zone     = "ru-central1-a"
   size     = "20"
-  image_id = "fd806aa6rq1b2cdqe03u" # fedora 35
+  image_id = "fd864gbboths76r8gm5f" # ubuntu-22-04-lts-v20221214
 }
 
 resource "yandex_compute_instance" "vm-1" {
@@ -95,8 +95,7 @@ output "external_ip_address_vm_2" {
   value = yandex_compute_instance.vm-2.network_interface.0.nat_ip_address
 }
 
-
-# extenral_ip_address_vm_1 = "51.250.91.179"
-# external_ip_address_vm_2 = "89.169.146.200"
-# internal_ip_address_vm_1 = "192.168.10.26"
-# internal_ip_address_vm_2 = "192.168.10.34"
+# extenral_ip_address_vm_1 = "89.169.129.233"
+# external_ip_address_vm_2 = "158.160.55.135"
+# internal_ip_address_vm_1 = "192.168.10.32"
+# internal_ip_address_vm_2 = "192.168.10.22"
