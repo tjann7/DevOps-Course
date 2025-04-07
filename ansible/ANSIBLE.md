@@ -1,84 +1,64 @@
-# Ansible Playbook Deployment output:
+# Ansible Playbook Execution:
 
 ```bash
-tjann@fedora:~/DevOps-Course/ansible$ ansible-playbook playbooks/dev/main.yaml | tail -n 50
-[WARNING]: Platform linux on host yandex_vm is using the discovered Python
-interpreter at /usr/bin/python3.10, but future installation of another Python
-interpreter could change the meaning of that path. See
-https://docs.ansible.com/ansible-
-core/2.18/reference_appendices/interpreter_discovery.html for more information.
+tjann@fedora:~/DevOps-Course/ansible$ ansible-playbook playbooks/dev/main.yaml
 
-PLAY [install Docker] **********************************************************
+PLAY [Deploy Python Container] *****************************************************************************************************************************************************
 
-TASK [Gathering Facts] *********************************************************
+TASK [Gathering Facts] *************************************************************************************************************************************************************
+[WARNING]: Platform linux on host yandex_vm is using the discovered Python interpreter at /usr/bin/python3.10, but future installation of another Python interpreter could change
+the meaning of that path. See https://docs.ansible.com/ansible-core/2.18/reference_appendices/interpreter_discovery.html for more information.
 ok: [yandex_vm]
 
-TASK [docker : Install Docker & compose] ***************************************
-included: /home/tjann/DevOps-Course/ansible/roles/docker/tasks/install_docker.yml for yandex_vm
+TASK [web_app : Include wipe tasks] ************************************************************************************************************************************************
+included: /home/tjann/DevOps-Course/ansible/roles/web_app/tasks/0-wipe.yml for yandex_vm
 
-TASK [docker : Install prerequisites] ******************************************
+TASK [web_app : Stop and remove containers] ****************************************************************************************************************************************
+[WARNING]: Cannot parse event from non-JSON line: b'WARNING: Error parsing config file (/root/.docker/config.json): Invalid auth configuration file'. Please report this at
+https://github.com/ansible-collections/community.docker/issues/new?assignees=&labels=&projects=&template=bug_report.md
+[WARNING]: Docker compose: unknown None: /opt/python-app/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion
 ok: [yandex_vm]
 
-TASK [docker : Add Docker official GPG key] ************************************
-ok: [yandex_vm]
-
-TASK [docker : Add Docker repository] ******************************************
-ok: [yandex_vm]
-
-TASK [docker : Update package cache] *******************************************
+TASK [web_app : Remove application directory] **************************************************************************************************************************************
 changed: [yandex_vm]
 
-TASK [docker : Install Docker] *************************************************
+TASK [web_app : Remove Docker image] ***********************************************************************************************************************************************
+changed: [yandex_vm]
+
+TASK [web_app : Create application directory] **************************************************************************************************************************************
+changed: [yandex_vm]
+
+TASK [web_app : Template docker-compose.yml] ***************************************************************************************************************************************
+changed: [yandex_vm]
+
+TASK [web_app : Create Docker config directory] ************************************************************************************************************************************
 ok: [yandex_vm]
 
-TASK [docker : Ensure Docker is running] ***************************************
+TASK [web_app : Configure Docker credentials] **************************************************************************************************************************************
 ok: [yandex_vm]
 
-TASK [docker : Install Docker Compose] *****************************************
-included: /home/tjann/DevOps-Course/ansible/roles/docker/tasks/install_compose.yml for yandex_vm
-
-TASK [docker : Install Docker Compose] *****************************************
+TASK [web_app : Wait for Docker daemon] ********************************************************************************************************************************************
 ok: [yandex_vm]
 
-PLAY RECAP *********************************************************************
-yandex_vm                  : ok=10   changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+TASK [web_app : Pull application image] ********************************************************************************************************************************************
+changed: [yandex_vm]
+
+TASK [web_app : Create deployment directory for web_app] ***************************************************************************************************************************
+changed: [yandex_vm]
+
+TASK [web_app : Start the application container using Docker Compose] **************************************************************************************************************
+changed: [yandex_vm]
+
+PLAY RECAP *************************************************************************************************************************************************************************
+yandex_vm                  : ok=13   changed=7    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 ```
-# Inventory Details
 
-## Inventory list
+Afterwards, the user can request the port via VM's terminal:
 
 ```bash
-tjann@fedora:~/DevOps-Course/ansible$ ansible-inventory -i inventory/default_aws_ec2.yml --list
-{
-    "_meta": {
-        "hostvars": {
-            "yandex_vm": {
-                "ansible_host": "89.169.129.233",
-                "ansible_ssh_private_key_file": "~/.ssh/yandex_vm",
-                "ansible_user": "tjann"
-            }
-        }
-    },
-    "all": {
-        "children": [
-            "ungrouped"
-        ]
-    },
-    "ungrouped": {
-        "hosts": [
-            "yandex_vm"
-        ]
-    }
-}
+tjann@fhmm5i5qjoo0bl0si2gd:~$ curl localhost:5005
+<!DOCTYPE html>
+<h1>Moscow Time: 23:12:00 Moscow</h1>
+<h2>Your Timezone: 20:12:00 </h2>
 ```
-
-## Inventory Structure
-
-```bash
-tjann@fedora:~/DevOps-Course/ansible$ ansible-inventory -i inventory/default_aws_ec2.yml --graph
-@all:
-  |--@ungrouped:
-  |  |--yandex_vm
-```
-
 

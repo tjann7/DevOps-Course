@@ -1,7 +1,7 @@
 
 ---
-- name: install Docker
+- name: Deploy Python Container
   hosts: all
   become: true
   roles:
-    - role: docker
+    - role: web_app
