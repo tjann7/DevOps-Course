@@ -94,3 +94,9 @@ output "extenral_ip_address_vm_1" {
 output "external_ip_address_vm_2" {
   value = yandex_compute_instance.vm-2.network_interface.0.nat_ip_address
 }
+
+
+# extenral_ip_address_vm_1 = "51.250.91.179"
+# external_ip_address_vm_2 = "89.169.146.200"
+# internal_ip_address_vm_1 = "192.168.10.26"
+# internal_ip_address_vm_2 = "192.168.10.34"
