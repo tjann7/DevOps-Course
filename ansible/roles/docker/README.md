@@ -34,13 +34,6 @@ This role installs and configures Docker and Docker Compose.
 7. Install completion check
 
 
-=======
-Docker and Docker Compose installation via Ansible role.
-
-## Requirements
-
-- Ansible 2.9+
-
 ## Playbook Instance
 
 ```yaml
