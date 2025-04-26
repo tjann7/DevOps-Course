@@ -2,8 +2,10 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: moscow-app
+  labels:
+    app: moscow-app
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: moscow-app
@@ -12,8 +14,7 @@ spec:
       labels:
         app: moscow-app
     spec:
+      serviceAccountName: internal-app
       containers:
-        - name: moscow-app
-          image: tjann7/moscow_time:latest
-          ports:
-            - containerPort: 5005
+      - name: moscow-app
+        image: tjann7/moscow_time:latest
