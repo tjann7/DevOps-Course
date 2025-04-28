@@ -21,3 +21,9 @@
 ## Pods,svc after removal
 
 ![](static/kubectl_remove_after.png)
+
+# Lab12 ConfigMaps
+
+- About changes in the Python webapp, please, observe README.md in app_python directory
+- 
+

@@ -53,6 +53,55 @@ Result of running is as follows:
 
 ![](images/image_docker2.png)
 
+## Docker-Compose
+
+Alternatively, the webapp can be executed via docker-compose command-line:
+```bash
+tjann@fedora:~/DevOps-Course/app_python$ docker-compose up -d
+WARN[0000] /home/tjann/DevOps-Course/app_python/docker-compose.yml: the attribute `version` is obsolete, it will be ignored, please remove it to avoid potential confusion 
+[+] Running 2/2
+ ✔ Network app_python_default          Created                                                                                                  0.3s 
+ ✔ Container app_python-moscow_time-1  Started                                                                                                  0.7s 
+tjann@fedora:~/DevOps-Course/app_python$ 
+```
+
+Afterwards, you may observe the address and all the request data in the docker logs:
+```bash
+tjann@fedora:~/DevOps-Course/app_python$ docker logs app_python-moscow_time-1 
+ * Serving Flask app 'moscow_app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.18.0.2:5000
+Press CTRL+C to quit
+Requests Counter updated: 8
+172.18.0.1 - - [28/Apr/2025 12:02:50] "GET / HTTP/1.1" 200 -
+Requests Counter updated: 9
+172.18.0.1 - - [28/Apr/2025 12:02:51] "GET / HTTP/1.1" 200 -
+Requests Counter updated: 10
+172.18.0.1 - - [28/Apr/2025 12:02:51] "GET / HTTP/1.1" 200 -
+Requests Counter updated: 11
+172.18.0.1 - - [28/Apr/2025 12:02:52] "GET / HTTP/1.1" 200 -
+Requests Counter updated: 12
+172.18.0.1 - - [28/Apr/2025 12:02:52] "GET / HTTP/1.1" 200 -
+tjann@fedora:~/DevOps-Course/app_python$ 
+```
+
+## Request Counter(Lab12)
+
+Within __app_python directory__ we now have a mounted volume __./data__ for storing Total Request Counter file:
+```bash
+tjann@fedora:~/DevOps-Course/app_python$ tree .
+.
+├── CI.md
+├── data
+│   └── visits
+├── docker-compose.yml
+├── Dockerfile
+...
+```
+
 ## Running unittest
 
 While being in the repository's directory, input the following commands:

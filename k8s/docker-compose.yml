@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+  moscow_time:
+    build: ../app_python/
+    ports:
+      - "5000:5000"
+      - "5005:5005"  # For Prometheus metrics
+    volumes:
+      - ./data:/data
