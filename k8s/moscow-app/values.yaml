@@ -54,7 +54,7 @@ service:
   # This sets the service type more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types
   type: ClusterIP
   # This sets the ports more information can be found here: https://kubernetes.io/docs/concepts/services-networking/service/#field-spec-ports
-  port: 80
+  port: 5000
 
 # This block is for setting up the ingress for more information can be found here: https://kubernetes.io/docs/concepts/services-networking/ingress/
 ingress:
@@ -105,14 +105,20 @@ autoscaling:
 
 # Additional volumes on the output Deployment definition.
 volumes:
-- name: config
-  configMap:
-    name: moscow-app-config
 
-# Additional volumeMounts on the output Deployment definition.
 volumeMounts:
-- name: config
-  mountPath: "/config"
+  - name: moscow-volume
+    mountPath: /data
+# - name: foo
+#   mountPath: "/etc/foo"
+#   readOnly: true
+
+volumeClaimTemplate:
+  name: moscow-volume
+  requestStorage: "100Mi"
+
+podManagementPolicy: Parallel
+
 
 nodeSelector: {}
 
