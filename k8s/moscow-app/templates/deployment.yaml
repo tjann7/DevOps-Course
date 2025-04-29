@@ -38,12 +38,6 @@ spec:
           securityContext:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-          env:
-          - name: MY_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: secret-of-moscow
-                key: password
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
