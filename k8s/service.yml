@@ -6,5 +6,5 @@ spec:
   selector:
     app: moscow-app
   ports:
-      port: 5005
-      targetPort: 5005
+      port: 5000
+      targetPort: 5000
