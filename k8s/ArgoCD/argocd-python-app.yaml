@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/tjann7/DevOps-Course.git
     targetRevision: lab13
-    path: ../k8s/moscow-app
+    path: k8s/moscow-app
     helm:
       valueFiles:
         - values.yaml
