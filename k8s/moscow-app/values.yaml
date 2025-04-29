@@ -9,7 +9,7 @@ replicaCount: 1
 image:
   repository: tjann7/moscow_time
   # This sets the pull policy for images.
-  pullPolicy: Always
+  pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: "latest"
 
@@ -107,21 +107,18 @@ autoscaling:
 volumes:
 - name: config
   configMap:
-    name: moscow-config
-
-config:
-  path: "files/config.json"
+    name: moscow-app-config
 
 # Additional volumeMounts on the output Deployment definition.
 volumeMounts:
 - name: config
   mountPath: "/config"
-# - name: foo
-#   mountPath: "/etc/foo"
-#   readOnly: true
 
 nodeSelector: {}
 
 tolerations: []
 
 affinity: {}
+
+config:
+  path: "files/config.json"
