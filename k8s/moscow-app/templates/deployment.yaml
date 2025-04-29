@@ -60,20 +60,10 @@ spec:
             {{- with .Values.volumeMounts }}
             {{- toYaml . | nindent 12 }}
             {{- end }}
-            - name: config-volume
-              mountPath: "/config.json"
-              subPath: config.json
-              readOnly: true
       volumes:
         {{- with .Values.volumes }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
-        - name: config-volume
-          configMap:
-            name: {{ include "moscow-app.fullname" . }}-config
-            items:
-            - key: config.json
-              path: config.json
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

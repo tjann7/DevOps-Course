@@ -104,24 +104,15 @@ autoscaling:
   # targetMemoryUtilizationPercentage: 80
 
 # Additional volumes on the output Deployment definition.
-volumes:
-- name: config
-  configMap:
-    name: moscow-app-config
+volumes: []
 
 # Additional volumeMounts on the output Deployment definition.
-volumeMounts:
-- name: config
-  mountPath: "/config"
-
+volumeMounts: []
 nodeSelector: {}
 
 tolerations: []
 
 affinity: {}
-
-config:
-  path: "files/config.json"
 
 env:
   ENVIRONMENT: prod
