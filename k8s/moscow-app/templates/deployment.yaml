@@ -1,29 +1,16 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: {{ include "moscow-app.fullname" . }}
   labels:
     {{- include "moscow-app.labels" . | nindent 4 }}
 spec:
-  serviceName: {{ include "moscow-app.fullname" . }}
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
-  podManagementPolicy: {{ .Values.podManagementPolicy }}
-
-  volumeClaimTemplates:
-    - metadata:
-        name: {{ .Values.volumeClaimTemplate.name }}
-      spec:
-        accessModes: ["ReadWriteOnce"]
-        resources:
-          requests:
-            storage: {{ .Values.volumeClaimTemplate.requestStorage }}
-
   selector:
     matchLabels:
       {{- include "moscow-app.selectorLabels" . | nindent 6 }}
-
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -35,7 +22,6 @@ spec:
         {{- with .Values.podLabels }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
-
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
@@ -46,7 +32,6 @@ spec:
       securityContext:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-
       containers:
         - name: {{ .Chart.Name }}
           {{- with .Values.securityContext }}
@@ -75,7 +60,6 @@ spec:
             {{- with .Values.volumeMounts }}
             {{- toYaml . | nindent 12 }}
             {{- end }}
-
       volumes:
         {{- with .Values.volumes }}
         {{- toYaml . | nindent 8 }}
